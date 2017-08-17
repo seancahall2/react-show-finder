@@ -2,31 +2,29 @@
 
 import React, { Component } from "react";
 import ShowCard from "./ShowCard";
+import Header from "./Header";
 
 class Search extends Component {
   state = {
     searchTerm: ""
   };
+
   props: {
     shows: Array<Show>
   };
   handleSearchTermChange = (
-    event: KeyboardEvent & { target: HTMLInputElement }
+    event: SyntheticKeyboardEvent & { target: HTMLInputElement }
   ) => {
     this.setState({ searchTerm: event.target.value });
   };
   render() {
     return (
       <div className="search">
-        <header>
-          <h1>Something Newer</h1>
-          <input
-            onChange={this.handleSearchTermChange}
-            value={this.state.searchTerm}
-            type="text"
-            placeholder="Search"
-          />
-        </header>
+        <Header
+          searchTerm={this.state.searchTerm}
+          showSearch
+          handleSearchTermChange={this.handleSearchTermChange}
+        />
         <div>
           {this.props.shows
             .filter(
